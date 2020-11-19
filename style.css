@@ -1,8 +1,13 @@
 body {
   font-family: 'JetBrains Mono NL', monospace;
   max-width: 720px;
-  margin: 0 auto;
-  padding: 25px;
+  margin: 25px auto;
+  padding: 0 25px;
+}
+
+h1, h2, h3, h4, h5, h6, p, ul, ol {
+  margin-block-start: 1em;
+  margin-block-end: 1em;
 }
 
 h1, h2, h3, h4, h5, h6 {
