@@ -1,0 +1,91 @@
+body {
+  font-family: 'JetBrains Mono NL', sans-serif;
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 25px;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-size: 1em;
+}
+h2::before {
+  content: '## ';
+  content: '## ' / '';
+}
+h3::before {
+  content: '## ';
+  content: '## ' / '';
+}
+h4::before {
+  content: '## ';
+  content: '## ' / '';
+}
+h5::before {
+  content: '## ';
+  content: '## ' / '';
+}
+h6::before {
+  content: '## ';
+  content: '## ' / '';
+}
+
+a {
+  color: inherit;
+}
+a:hover {
+  background-color: #000;
+  color: #fff;
+}
+
+address {
+  display: inline-block;
+  font-style: normal;
+}
+
+header + section, section + section {
+  margin-top: 1em;
+  border-top: 1px solid;
+}
+
+details > p:first-of-type {
+  margin-top: 0;
+}
+
+ul {
+  padding-inline-start: 2ch;
+}
+ul li {
+  list-style-type: '- ';
+}
+ul h1,
+ul h2,
+ul h3,
+ul h4,
+ul h5,
+ul h6,
+ul p {
+  margin: 0;
+}
+ul h1::before,
+ul h2::before,
+ul h3::before,
+ul h4::before,
+ul h5::before,
+ul h6::before {
+  content: unset;
+}
+
+.stack-1 > * + * {
+  margin-block-start: 1em;
+}
+
+@media (prefers-color-scheme: dark) {
+  body {
+    background-color: #111;
+    color: #ddd;
+  }
+  a:hover {
+    background-color: #ddd;
+    color: #111;
+  }
+}
