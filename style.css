@@ -86,6 +86,9 @@ ul h6::before {
 }
 
 @media (prefers-color-scheme: dark) {
+  :root {
+    color-scheme: dark;
+  }
   body {
     background-color: #111;
     color: #ddd;
