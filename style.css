@@ -54,7 +54,7 @@ ul p {
   margin: 0;
 }
 
-ul li + li {
+.stack > * + * {
   margin-block-start: 1em;
 }
 
