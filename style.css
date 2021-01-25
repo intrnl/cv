@@ -53,16 +53,8 @@ ul h6,
 ul p {
   margin: 0;
 }
-ul h1::before,
-ul h2::before,
-ul h3::before,
-ul h4::before,
-ul h5::before,
-ul h6::before {
-  content: unset;
-}
 
-.stack-1 > * + * {
+ul li + li {
   margin-block-start: 1em;
 }
 
