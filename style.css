@@ -14,26 +14,6 @@ h1, h2, h3, h4, h5, h6, p, ul, ol {
 h1, h2, h3, h4, h5, h6 {
   font-size: 1em;
 }
-h2::before {
-  content: '## ';
-  content: '## ' / '';
-}
-h3::before {
-  content: '## ';
-  content: '## ' / '';
-}
-h4::before {
-  content: '## ';
-  content: '## ' / '';
-}
-h5::before {
-  content: '## ';
-  content: '## ' / '';
-}
-h6::before {
-  content: '## ';
-  content: '## ' / '';
-}
 
 a {
   color: inherit;
