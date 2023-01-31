@@ -149,7 +149,9 @@ export const cv = <T>(base: ClassValue, config?: Config<T>) => {
 			const variantKey = coerceKey(variantProp) as keyof typeof variants[typeof variant];
 			const variantClass = variants[variant][variantKey];
 
-			result += ' ' + variantClass;
+			if (variantClass) {
+				result += ' ' + variantClass;
+			}
 		}
 
 		if (compoundVariants) {
