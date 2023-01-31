@@ -7,7 +7,7 @@ Fast, almost drop-in replacement for [`cva`](https://github.com/joe-bell/cva)
 ```js
 import { cv } from '@intrnl/cv';
 
-const button = cva('button', {
+const button = cv('button', {
 	variants: {
 		variant: {
 			contained: 'button--variant-contained',
