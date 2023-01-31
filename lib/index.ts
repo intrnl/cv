@@ -53,10 +53,14 @@ export type VariantProps<Component extends (...args: any) => any> = Omit<
 	'className'
 >;
 
-export const cv = <T>(base?: ClassValue, config?: Config<T>) => {
+export const cv = <T>(base: ClassValue, config?: Config<T>) => {
 	return (props?: Props<T>) => {
 		if (!config || !config.variants) {
-			return cx([base, props && props.className]);
+			if (props && props.className) {
+				return cx([base, props.className]);
+			}
+
+			return base;
 		}
 
 		const variants = config.variants;
