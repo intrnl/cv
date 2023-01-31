@@ -1,7 +1,7 @@
 {
 	"name": "@intrnl/cv",
 	"description": "Utility for constructing CSS class names based on variants",
-	"version": "0.1.1",
+	"version": "0.1.2",
 	"author": "intrnl",
 	"license": "MIT",
 	"repository": {
