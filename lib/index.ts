@@ -31,44 +31,94 @@ type StringToBoolean<T> = T extends 'true' | 'false' ? boolean : T;
 
 type ConfigSchema = Record<string, Record<string, ClassValue>>;
 
-type ConfigVariants<T extends ConfigSchema> = {
-	[Variant in keyof T]?: StringToBoolean<keyof T[Variant]> | null;
-};
-type ConfigVariantsMulti<T extends ConfigSchema> = {
-	[Variant in keyof T]?: StringToBoolean<keyof T[Variant]> | StringToBoolean<keyof T[Variant]>[] | null;
-};
+type ConfigVariants<T> = T extends ConfigSchema
+	? { [Variant in keyof T]?: StringToBoolean<keyof T[Variant]> | StringToBoolean<keyof T[Variant]>[] | null }
+	: never;
 
 type Config<T> = T extends ConfigSchema ? {
-		variants?: T;
+		variants: T;
 		defaultVariants?: ConfigVariants<T>;
-		compoundVariants?: (T extends ConfigSchema ? (ConfigVariants<T> | ConfigVariantsMulti<T>) & ClassObj : ClassObj)[];
+		compoundVariants?: (T extends ConfigSchema ? (ConfigVariants<T> & ClassObj) : ClassObj)[];
 	}
 	: never;
 
-type Props<T> = T extends ConfigSchema ? ConfigVariants<T> & ClassObj
+type Props<T> = T extends ConfigSchema ? (ConfigVariants<T> & ClassObj)
 	: ClassObj;
+
+type InternalSchema = Record<string, Record<string, string>>;
+type InternalVariants<T> = ConfigVariants<T> & { className: string };
 
 export type VariantProps<Component extends (...args: any) => any> = Omit<
 	OmitUndefined<Parameters<Component>[0]>,
 	'className'
 >;
 
+const rv = (className: ClassValue) => {
+	return Array.isArray(className) ? cx(className) : className || '';
+};
+
 export const cv = <T>(base: ClassValue, config?: Config<T>) => {
+	const resolvedBase = rv(base);
+
+	let variants: InternalSchema | undefined;
+	let compoundVariants: InternalVariants<T>[] | undefined;
+	let defaultVariants: ConfigVariants<T> | undefined;
+
+	if (config) {
+		const confVariants = config.variants;
+		const confCompoundVariants = config.compoundVariants;
+
+		defaultVariants = config.defaultVariants;
+
+		for (const variant in confVariants) {
+			const confElements = confVariants[variant];
+			const elements: Record<string, string> = {};
+
+			for (const element in confElements) {
+				const elementClass = confElements[element];
+
+				const resolvedElementClass = rv(elementClass);
+				elements[element] = resolvedElementClass;
+			}
+
+			if (!variants) {
+				variants = {};
+			}
+
+			variants[variant] = elements;
+		}
+
+		if (confCompoundVariants) {
+			for (let idx = 0, len = confCompoundVariants.length; idx < len; idx++) {
+				const options = confCompoundVariants[idx];
+				const className = options.className;
+
+				const resolvedClassName = rv(className);
+
+				if (!resolvedClassName) {
+					continue;
+				}
+
+				if (!compoundVariants) {
+					compoundVariants = [];
+				}
+
+				// @ts-expect-error
+				compoundVariants.push({ ...options, className: resolvedClassName });
+			}
+		}
+	}
+
 	return (props?: Props<T>) => {
-		if (!config || !config.variants) {
+		if (!variants) {
 			if (props && props.className) {
 				return cx([base, props.className]);
 			}
 
-			return base;
+			return resolvedBase;
 		}
 
-		const variants = config.variants;
-		const defaultVariants = config.defaultVariants;
-		const compoundVariants = config.compoundVariants;
-
-		const variantClasses: ClassValue[] = [];
-		const compoundVariantClasses: ClassValue[] = [];
+		let result = resolvedBase;
 
 		let combinedProps: Record<string, unknown>;
 
@@ -99,9 +149,7 @@ export const cv = <T>(base: ClassValue, config?: Config<T>) => {
 			const variantKey = coerceKey(variantProp) as keyof typeof variants[typeof variant];
 			const variantClass = variants[variant][variantKey];
 
-			// NOTE: adding a conditional before pushing to array only improves
-			// cases where there is no default variants or compound variants.
-			variantClasses.push(variantClass);
+			result += ' ' + variantClass;
 		}
 
 		if (compoundVariants) {
@@ -118,6 +166,7 @@ export const cv = <T>(base: ClassValue, config?: Config<T>) => {
 					const value = combinedProps[key];
 
 					if (Array.isArray(match)) {
+						// @ts-expect-error
 						if (!match.includes(value)) {
 							continue loop;
 						}
@@ -127,15 +176,14 @@ export const cv = <T>(base: ClassValue, config?: Config<T>) => {
 					}
 				}
 
-				compoundVariantClasses.push(compoundOptions.className);
+				result += ' ' + compoundOptions.className;
 			}
 		}
 
-		return cx([
-			base,
-			variantClasses,
-			compoundVariantClasses,
-			props && props.className,
-		]);
+		if (props && props.className) {
+			return cx([result, props.className]);
+		}
+
+		return result;
 	};
 };
