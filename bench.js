@@ -234,59 +234,79 @@ function createTestSuite (cva) {
 				},
 			},
 		}),
-		button: cva('inline-flex min-w-16 items-center justify-center leading-6 transition-colors', {
-			variants: {
-				variant: {
-					contained: 'py-1.5 px-4',
-					text: 'bg-opacity-0 py-1.5 px-2 hover:bg-opacity-5 focus-visible:bg-opacity-25 active:bg-opacity-25',
-					outlined:
-						'border border-opacity-50 py-[5.2px] px-[15px] hover:border-opacity-100 hover:bg-opacity-5 focus-visible:bg-opacity-25 active:bg-opacity-25',
+		button: cva(
+			'inline-flex min-w-16 items-center justify-center leading-6 transition-colors',
+			{
+				variants: {
+					variant: {
+						contained: 'py-1.5 px-4',
+						text: [
+							'bg-opacity-0 py-1.5 px-2',
+							'hover:bg-opacity-5',
+							'focus-visible:bg-opacity-25',
+							'active:bg-opacity-25',
+						],
+						outlined: [
+							'border border-opacity-50 py-[5.2px] px-[15px]',
+							'hover:border-opacity-100 hover:bg-opacity-5',
+							'focus-visible:bg-opacity-25 active:bg-opacity-25',
+						],
+					},
+					color: {
+						primary: '',
+						error: '',
+					},
+					rounded: {
+						true: 'rounded',
+						false: null,
+					},
 				},
-				color: {
-					primary: '',
-					error: '',
-				},
-				rounded: {
-					true: 'rounded',
-					false: null,
-				},
-			},
-			defaultVariants: {
-				variant: 'text',
-				rounded: true,
-			},
-			compoundVariants: [
-				{
-					variant: 'contained',
-					color: 'primary',
-					className: 'bg-primary text-primary-contrast focus-visible:bg-primary-light active:bg-primary-dark',
-				},
-				{
-					variant: 'contained',
-					color: 'error',
-					className: 'bg-red-400 text-white focus-visible:bg-red-300 active:bg-red-700',
-				},
-
-				{
+				defaultVariants: {
 					variant: 'text',
-					color: undefined,
-					className: 'bg-black',
+					rounded: true,
 				},
-				{
-					variant: 'text',
-					color: 'primary',
-					className: 'bg-primary text-primary',
-				},
+				compoundVariants: [
+					{
+						variant: 'contained',
+						color: 'primary',
+						className: [
+							'bg-primary text-primary-contrast',
+							'focus-visible:bg-primary-light',
+							'active:bg-primary-dark',
+						],
+					},
+					{
+						variant: 'contained',
+						color: 'error',
+						className: ['bg-red-400 text-white', 'focus-visible:bg-red-300', 'active:bg-red-700'],
+					},
 
-				{
-					variant: 'outlined',
-					color: 'primary',
-					className: 'border-primary bg-primary bg-opacity-0 text-primary',
-				},
-			],
-		}),
+					{
+						variant: 'text',
+						color: undefined,
+						className: 'bg-black',
+					},
+					{
+						variant: 'text',
+						color: 'primary',
+						className: 'bg-primary text-primary',
+					},
+
+					{
+						variant: 'outlined',
+						color: 'primary',
+						className: 'border-primary bg-primary bg-opacity-0 text-primary',
+					},
+				],
+			},
+		),
 		iconButton: cva(
-			'inline-flex rounded-full bg-opacity-0 align-middle text-3xl transition-colors hover:bg-opacity-5 focus-visible:bg-opacity-25 active:bg-opacity-25',
+			[
+				'inline-flex rounded-full bg-opacity-0 align-middle text-3xl transition-colors',
+				'hover:bg-opacity-5',
+				'focus-visible:bg-opacity-25',
+				'active:bg-opacity-25',
+			],
 			{
 				variants: {
 					color: {
