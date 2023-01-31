@@ -1,7 +1,7 @@
 export type ClassValue = string | false | 0 | null | undefined | ClassValue[];
 
 export type ClassKey = 'className';
-export type ClassObj = { className: ClassValue };
+export type ClassObj = { className?: ClassValue };
 
 export const cx = (classes: ClassValue[]) => {
 	let result = '';
