@@ -53,39 +53,39 @@ benchmark      time (avg)             (min … max)       p75       p99      p99
 ------------------------------------------------- -----------------------------
 • paper
 ------------------------------------------------- -----------------------------
-cv         276.99 ns/iter (263.84 ns … 497.04 ns) 283.44 ns 411.18 ns 497.04 ns
-cva          4.63 µs/iter     (4.58 µs … 4.83 µs)   4.64 µs   4.83 µs   4.83 µs
+cv         271.26 ns/iter (256.93 ns … 539.72 ns) 280.49 ns 507.75 ns 539.72 ns
+cva          4.51 µs/iter     (4.43 µs … 4.73 µs)   4.54 µs   4.73 µs   4.73 µs
 
 summary for paper
   cv
-   16.72x faster than cva
+   16.64x faster than cva
 
 • button
 ------------------------------------------------- -----------------------------
-cv          16.18 µs/iter    (12.43 µs … 3.46 ms)  14.95 µs  21.58 µs  23.89 µs
-cva        114.82 µs/iter    (95.12 µs … 4.17 ms) 104.55 µs 240.32 µs 345.43 µs
+cv          14.43 µs/iter    (11.64 µs … 3.95 ms)  13.24 µs  19.02 µs  30.02 µs
+cva        112.13 µs/iter    (93.11 µs … 4.14 ms)  98.16 µs 239.55 µs 322.11 µs
 
 summary for button
   cv
-   7.1x faster than cva
+   7.77x faster than cva
 
 • iconButton
 ------------------------------------------------- -----------------------------
-cv           6.03 µs/iter     (5.94 µs … 6.34 µs)   6.03 µs   6.34 µs   6.34 µs
-cva         15.66 µs/iter      (13.2 µs … 2.8 ms)  15.22 µs  21.44 µs     22 µs
+cv           5.88 µs/iter     (5.48 µs … 5.98 µs)   5.93 µs   5.98 µs   5.98 µs
+cva         14.28 µs/iter     (12.8 µs … 3.92 ms)  13.75 µs  16.46 µs  17.07 µs
 
 summary for iconButton
   cv
-   2.6x faster than cva
+   2.43x faster than cva
 
 • tableCell
 ------------------------------------------------- -----------------------------
-cv         193.23 ns/iter (152.39 ns … 296.48 ns) 231.24 ns 249.35 ns 264.89 ns
-cva          5.13 µs/iter     (5.07 µs … 5.23 µs)   5.16 µs   5.23 µs   5.23 µs
+cv         114.64 ns/iter  (88.12 ns … 259.32 ns) 163.09 ns 207.77 ns 221.94 ns
+cva          5.07 µs/iter     (4.97 µs … 5.17 µs)   5.11 µs   5.17 µs   5.17 µs
 
 summary for tableCell
   cv
-   26.55x faster than cva
+   44.22x faster than cva
 ```
 
 ### Bun 0.5.3 / JavaScriptCore
@@ -100,37 +100,37 @@ benchmark      time (avg)             (min … max)       p75       p99      p99
 ------------------------------------------------- -----------------------------
 • paper
 ------------------------------------------------- -----------------------------
-cv         224.73 ns/iter  (206.3 ns … 510.17 ns) 219.75 ns  354.1 ns 377.12 ns
-cva          1.54 µs/iter     (1.45 µs … 2.32 µs)   1.53 µs   2.32 µs   2.32 µs
+cv         229.81 ns/iter (213.94 ns … 501.96 ns) 226.23 ns 309.87 ns 334.39 ns
+cva           1.5 µs/iter     (1.44 µs … 2.28 µs)   1.48 µs   2.28 µs   2.28 µs
 
 summary for paper
   cv
-   6.85x faster than cva
+   6.53x faster than cva
 
 • button
 ------------------------------------------------- -----------------------------
-cv           4.79 µs/iter     (4.72 µs … 5.08 µs)   4.78 µs   5.08 µs   5.08 µs
-cva         35.95 µs/iter      (31.5 µs … 1.1 ms)  35.69 µs  73.47 µs  78.57 µs
+cv           4.47 µs/iter   (4.05 µs … 458.12 µs)   4.51 µs   6.76 µs   7.08 µs
+cva         34.69 µs/iter     (30.68 µs … 1.5 ms)  34.58 µs  73.02 µs   77.1 µs
 
 summary for button
   cv
-   7.51x faster than cva
+   7.76x faster than cva
 
 • iconButton
 ------------------------------------------------- -----------------------------
-cv           1.84 µs/iter      (1.78 µs … 2.1 µs)   1.85 µs    2.1 µs    2.1 µs
-cva          5.84 µs/iter     (5.73 µs … 6.19 µs)   5.94 µs   6.19 µs   6.19 µs
+cv           1.81 µs/iter     (1.79 µs … 1.86 µs)   1.83 µs   1.86 µs   1.86 µs
+cva          5.75 µs/iter     (5.69 µs … 6.16 µs)   5.74 µs   6.16 µs   6.16 µs
 
 summary for iconButton
   cv
-   3.18x faster than cva
+   3.17x faster than cva
 
 • tableCell
 ------------------------------------------------- -----------------------------
-cv         241.61 ns/iter  (222.3 ns … 406.55 ns) 232.96 ns 371.83 ns 383.27 ns
-cva          1.04 µs/iter   (988.56 ns … 1.28 µs)   1.05 µs   1.28 µs   1.28 µs
+cv         134.43 ns/iter (125.64 ns … 285.45 ns)  131.5 ns 221.18 ns 279.19 ns
+cva           1.1 µs/iter     (1.08 µs … 1.27 µs)   1.11 µs   1.27 µs   1.27 µs
 
 summary for tableCell
   cv
-   4.32x faster than cva
+   8.22x faster than cva
 ```

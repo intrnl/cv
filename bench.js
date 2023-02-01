@@ -1,5 +1,5 @@
-import { cva } from 'class-variance-authority';
 import { bench, group, run } from 'mitata';
+import { cva } from 'class-variance-authority';
 import { cv } from './lib/index';
 
 const usingCv = createTestSuite(cv);
@@ -203,7 +203,7 @@ group('tableCell', () => {
 		tableCellCv({ className: 'w-38' });
 		tableCellCv({ className: 'w-24' });
 	});
-
+	
 	bench('cva', () => {
 		tableCellCva();
 		tableCellCva({ className: 'text-center' });

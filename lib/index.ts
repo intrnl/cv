@@ -113,9 +113,15 @@ export const cv = <T>(base: ClassValue, config?: Config<T>) => {
 	}
 
 	return (props?: Props<T>) => {
+		const className = props && props.className;
+
 		if (!variants) {
-			if (props && props.className) {
-				return cx([base, props.className]);
+			if (typeof className === 'string') {
+				return resolvedBase + ' ' + className;
+			}
+
+			if (Array.isArray(className)) {
+				return resolvedBase + ' ' + cx(className);
 			}
 
 			return resolvedBase;
@@ -184,8 +190,12 @@ export const cv = <T>(base: ClassValue, config?: Config<T>) => {
 			}
 		}
 
-		if (props && props.className) {
-			return cx([result, props.className]);
+		if (typeof className === 'string') {
+			return result + ' ' + className;
+		}
+
+		if (Array.isArray(className)) {
+			return result + ' ' + cx(className);
 		}
 
 		return result;
