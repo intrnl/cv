@@ -31,14 +31,17 @@ type StringToBoolean<T> = T extends 'true' | 'false' ? boolean : T;
 
 type ConfigSchema = Record<string, Record<string, ClassValue>>;
 
-type ConfigVariants<T> = T extends ConfigSchema
+type ConfigVariants<T> = T extends ConfigSchema ? { [Variant in keyof T]?: StringToBoolean<keyof T[Variant]> | null }
+	: never;
+
+type ConfigMultiVariants<T> = T extends ConfigSchema
 	? { [Variant in keyof T]?: StringToBoolean<keyof T[Variant]> | StringToBoolean<keyof T[Variant]>[] | null }
 	: never;
 
 type Config<T> = T extends ConfigSchema ? {
 		variants: T;
 		defaultVariants?: ConfigVariants<T>;
-		compoundVariants?: (T extends ConfigSchema ? (ConfigVariants<T> & ClassObj) : ClassObj)[];
+		compoundVariants?: (T extends ConfigSchema ? (ConfigMultiVariants<T> & ClassObj) : ClassObj)[];
 	}
 	: never;
 
@@ -168,7 +171,6 @@ export const cv = <T>(base: ClassValue, config?: Config<T>) => {
 					const value = combinedProps[key];
 
 					if (Array.isArray(match)) {
-						// @ts-expect-error
 						if (!match.includes(value)) {
 							continue loop;
 						}
